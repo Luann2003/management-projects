@@ -17,6 +17,8 @@ INSERT INTO tb_project (name, description, start_date, finish_date) VALUES ('tes
 INSERT INTO tb_project (name, description, start_date, finish_date) VALUES ('test 2', 'test descrição 2', TIMESTAMP WITH TIME ZONE '2020-08-13T22:33:07.12345Z', TIMESTAMP WITH TIME ZONE '2020-07-15T16:15:22.12345Z' )
 INSERT INTO tb_project (name, description, start_date, finish_date) VALUES ('test 3', 'test descrição 3', TIMESTAMP WITH TIME ZONE '2020-08-22T15:20:07.12345Z', TIMESTAMP WITH TIME ZONE '2020-07-15T12:35:35.12345Z' )
 INSERT INTO tb_project (name, description, start_date, finish_date) VALUES ('test 4', 'test descrição 4', TIMESTAMP WITH TIME ZONE '2020-09-13T10:50:07.12345Z', TIMESTAMP WITH TIME ZONE '2020-09-15T11:36:55.12345Z' )
+INSERT INTO tb_project (name, description, start_date, finish_date) VALUES ('test 5', 'test descrição 5', TIMESTAMP WITH TIME ZONE '2020-09-13T10:50:07.12345Z', TIMESTAMP WITH TIME ZONE '2020-09-15T11:36:55.12345Z' )
+
 
 INSERT INTO tb_task (project_id, name, description, start_date, finish_date) VALUES (1, 'task 1', 'descrição da tarefa do projeto 1 ', TIMESTAMP WITH TIME ZONE '2020-07-13T20:50:07.12345Z', TIMESTAMP WITH TIME ZONE '2020-07-15T14:33:25.12345Z' )
 INSERT INTO tb_task (project_id, name, description, start_date, finish_date) VALUES (2, 'task 2', ' descrição da tarefa do projeto 2', TIMESTAMP WITH TIME ZONE '2020-07-13T20:50:07.12345Z', TIMESTAMP WITH TIME ZONE '2020-07-15T14:33:25.12345Z' )
