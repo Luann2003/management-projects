@@ -1,8 +1,11 @@
 package com.managementprojects.dto;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.managementprojects.entities.Project;
+import com.managementprojects.entities.Task;
 
 public class ProjectDTO {
 	
@@ -11,6 +14,8 @@ public class ProjectDTO {
 	private String description;
 	private Instant startDate;
 	private Instant finishDate;
+	
+	private List<TaskDTO> tasks = new ArrayList<>();
 	
 	public ProjectDTO() {
 	}
@@ -29,6 +34,10 @@ public class ProjectDTO {
 		description = entity.getDescription();
 		startDate = entity.getStartDate();
 		finishDate = entity.getFinishDate();
+		
+		for (Task task : entity.getTask()) {
+			tasks.add(new TaskDTO(task));    
+		 }
 	}
 
 	public Long getId() {
@@ -69,5 +78,9 @@ public class ProjectDTO {
 
 	public void setFinishDate(Instant finishDate) {
 		this.finishDate = finishDate;
+	}
+
+	public List<TaskDTO> getTasks() {
+		return tasks;
 	}
 }

@@ -1,6 +1,6 @@
 package com.managementprojects.entities;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -21,9 +21,9 @@ public class Task {
 	private Long id;
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDate startDate;
+	private Instant startDate;
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDate finishDate;
+	private Instant finishDate;
 	
 	private String description;
 	private String name;
@@ -35,7 +35,7 @@ public class Task {
 	public Task() {
 	}
 
-	public Task(Long id, LocalDate startDate, LocalDate finishDate, String description, String name) {
+	public Task(Long id, Instant startDate, Instant finishDate, String description, String name) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -48,41 +48,33 @@ public class Task {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-	public LocalDate getStartDate() {
+	public Instant getStartDate() {
 		return startDate;
 	}
 
-
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(Instant startDate) {
 		this.startDate = startDate;
 	}
 
-
-	public LocalDate getFinishDate() {
+	public Instant getFinishDate() {
 		return finishDate;
 	}
 
-
-	public void setFinishDate(LocalDate finishDate) {
+	public void setFinishDate(Instant finishDate) {
 		this.finishDate = finishDate;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -93,8 +85,6 @@ public class Task {
 		return description;
 	}
 
-
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -102,11 +92,7 @@ public class Task {
 	public Project getProject() {
 		return project;
 	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

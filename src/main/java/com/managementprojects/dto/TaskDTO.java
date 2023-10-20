@@ -1,6 +1,6 @@
 package com.managementprojects.dto;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
 import com.managementprojects.entities.Task;
 
@@ -9,10 +9,8 @@ public class TaskDTO {
 	private Long id;
 	private String description;
 	private String name;
-	private LocalDate finishDate;
-	private LocalDate startDate;
-	
-	private String projectDTO;
+	private Instant finishDate;
+	private Instant startDate;
 	
 	public TaskDTO() {
 	}
@@ -23,7 +21,6 @@ public class TaskDTO {
 		description = entity.getDescription();
 		startDate = entity.getStartDate();
 		finishDate = entity.getFinishDate();
-		projectDTO = entity.getProject().getName();
 	}
 
 	public Long getId() {
@@ -50,30 +47,19 @@ public class TaskDTO {
 		this.name = name;
 	}
 
-	public LocalDate getFinishDate() {
+	public Instant getFinishDate() {
 		return finishDate;
 	}
 
-	public void setFinishDate(LocalDate finishDate) {
+	public void setFinishDate(Instant finishDate) {
 		this.finishDate = finishDate;
 	}
 
-	public LocalDate getStartDate() {
+	public Instant getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(Instant startDate) {
 		this.startDate = startDate;
 	}
-
-	public String getProjectDTO() {
-		return projectDTO;
-	}
-
-	public void setProjectDTO(String projectDTO) {
-		this.projectDTO = projectDTO;
-	}
-
-	
-	
 }

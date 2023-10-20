@@ -24,7 +24,6 @@ public class ProjectService {
 	private ProjectRepository repository;
 	
 	@Transactional(readOnly = true)
-	
 	public List<ProjectDTO> findAll () {
 		List<Project> list = repository.findAll();
 		return list.stream().map(x -> new ProjectDTO(x)).toList();
