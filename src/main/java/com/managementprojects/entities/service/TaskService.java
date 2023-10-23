@@ -19,9 +19,35 @@ public class TaskService {
 	
 	@Transactional(readOnly = true)
 	public List<TaskDTO> findAll () {
-		List<Task> list = repository.findAll();
+		List<Task> list = repository.search02();
+		System.out.println(list.get(0).getName());
 		return list.stream().map(x -> new TaskDTO(x)).toList();
+	
 	}
+	
+	
+	
+	
+//	@Transactional(readOnly = true)
+//	public List<TaskDTO> findAll () {
+//		List<TaskDTO> list = repository.search02();
+//		//List<TaskDTO> taskDTOList = new ArrayList<>();
+//		System.out.println(list.get(0).getName());
+//		return list;
+//		
+//	    for (TaskDetailsProjection projection : list) {
+//	    	
+//	        TaskDTO taskDTO = new TaskDTO();
+//	        taskDTO.setName(projection.getName());
+//	        taskDTO.setDescription(projection.getDescription());
+//	        taskDTO.setStartDate(projection.getStartDate());
+//	        taskDTO.setFinishDate(projection.getFinishDate());
+//
+//	        taskDTOList.add(taskDTO);
+//	    }
+//
+//	    return taskDTOList;
+//	}
 	
 	@Transactional(readOnly = true)
 	public TaskDTO findById(Long id) {

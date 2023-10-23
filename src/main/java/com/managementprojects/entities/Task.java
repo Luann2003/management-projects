@@ -35,13 +35,14 @@ public class Task {
 	public Task() {
 	}
 
-	public Task(Long id, Instant startDate, Instant finishDate, String description, String name) {
+	public Task(Long id, Instant startDate, Instant finishDate, String description, String name, Project project) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
 		this.finishDate = finishDate;
 		this.description = description;
 		this.name = name;
+		this.project = project;
 	}
 
 	public Long getId() {

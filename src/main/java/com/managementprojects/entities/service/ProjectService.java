@@ -75,7 +75,4 @@ public class ProjectService {
 		entity.setStartDate(dto.getStartDate());
 		entity.setFinishDate(dto.getFinishDate());
 	}
-	
-	
-
 }

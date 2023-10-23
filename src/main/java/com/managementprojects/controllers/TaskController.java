@@ -42,6 +42,4 @@ public class TaskController {
 	                .buildAndExpand(dto.getId()).toUri();
 		 return ResponseEntity.created(uri).body(dto);
 	}
-	
-
 }

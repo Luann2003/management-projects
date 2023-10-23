@@ -12,8 +12,11 @@ public class TaskDTO {
 	private Instant finishDate;
 	private Instant startDate;
 	
+	private String projectName;
+	
 	public TaskDTO() {
 	}
+	
 	
 	public TaskDTO(Task entity) {
 		id = entity.getId();
@@ -21,6 +24,7 @@ public class TaskDTO {
 		description = entity.getDescription();
 		startDate = entity.getStartDate();
 		finishDate = entity.getFinishDate();
+		projectName = entity.getProject().getName();
 	}
 
 	public Long getId() {
@@ -62,4 +66,14 @@ public class TaskDTO {
 	public void setStartDate(Instant startDate) {
 		this.startDate = startDate;
 	}
+
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
 }
