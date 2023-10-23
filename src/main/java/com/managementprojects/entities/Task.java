@@ -89,11 +89,15 @@ public class Task {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
 	public Project getProject() {
 		return project;
 	}
-	
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
