@@ -3,15 +3,20 @@ package com.managementprojects.entities.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.managementprojects.dto.TaskDTO;
 import com.managementprojects.entities.Project;
 import com.managementprojects.entities.Task;
+import com.managementprojects.entities.service.exceptions.DatabaseException;
 import com.managementprojects.entities.service.exceptions.ResourceNotFoundException;
 import com.managementprojects.repository.ProjectRepository;
 import com.managementprojects.repository.TaskRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class TaskService {
@@ -53,11 +58,37 @@ public class TaskService {
 		 return new TaskDTO(entity);
 	  
 		}
-
-		private void copyDtoToEntity(TaskDTO dto, Task entity) {
-		    entity.setName(dto.getName());
-		    entity.setDescription(dto.getDescription());
-		    entity.setStartDate(dto.getStartDate());
-		    entity.setFinishDate(dto.getFinishDate());  
+	
+	@Transactional
+	public TaskDTO update(Long id, TaskDTO dto) {
+		try {
+			Task entity = repository.getReferenceById(id);
+			copyDtoToEntity(dto, entity);
+			entity = repository.save(entity);
+			return new TaskDTO(entity);
 		}
+		catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
+	}
+	
+	@Transactional(propagation = Propagation.SUPPORTS)
+    public void delete(Long id) {
+    	if (!repository.existsById(id)) {
+    		throw new ResourceNotFoundException("Recurso não encontrado");
+    	}
+    	try {
+            repository.deleteById(id);    		
+    	}
+        catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Falha de integridade referencial");
+        }
+    }
+	
+	private void copyDtoToEntity(TaskDTO dto, Task entity) {
+	    entity.setName(dto.getName());
+	    entity.setDescription(dto.getDescription());
+	    entity.setStartDate(dto.getStartDate());
+	    entity.setFinishDate(dto.getFinishDate());  
+	}
 }
