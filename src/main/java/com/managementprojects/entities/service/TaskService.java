@@ -32,7 +32,6 @@ public class TaskService {
 		List<Task> list = repository.search02();
 		System.out.println(list.get(0).getName());
 		return list.stream().map(x -> new TaskDTO(x)).toList();
-	
 	}
 	
 	@Transactional(readOnly = true)
@@ -56,7 +55,6 @@ public class TaskService {
 		 entity = repository.save(entity);
 		 
 		 return new TaskDTO(entity);
-	  
 		}
 	
 	@Transactional
