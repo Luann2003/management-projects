@@ -42,8 +42,6 @@ public class Task {
 		this.name = name;
 		this.project = project;
 	}
-	
-	 
 
 	public Long getId() {
 		return id;

@@ -16,9 +16,9 @@ public class TaskDTO {
 	
 	@NotBlank(message = "Campo obrigatório")
 	private String name;
-	@NotNull(message = "A data não deve ser informada")
+	@NotNull(message = "A data deve ser informada")
 	private Instant startDate;
-	@NotNull(message = "A data não deve ser informada")
+	@NotNull(message = "A data deve ser informada")
 	private Instant finishDate;
 	
 	@NotNull(message = "Você deve informar o id do projeto")
@@ -56,7 +56,7 @@ public class TaskDTO {
 		if (startDate != null && finishDate != null) {
 			return finishDate.isAfter(startDate);
 		}
-		return true; // Se alguma data for nula, a validação passa
+		return true;
 	}
 
 	public Long getId() {
