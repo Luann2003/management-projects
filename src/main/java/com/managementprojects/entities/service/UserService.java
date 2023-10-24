@@ -20,8 +20,8 @@ import com.managementprojects.entities.Role;
 import com.managementprojects.entities.User;
 import com.managementprojects.entities.service.exceptions.ResourceNotFoundException;
 import com.managementprojects.projections.UserDetailsProjection;
+import com.managementprojects.repository.RoleRepository;
 import com.managementprojects.repository.UserRepository;
-import com.managementprojects.repository.roleRepository;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
 	private AuthService authService;
 	
 	@Autowired
-	private roleRepository roleRepository;
+	private RoleRepository roleRepository;
 	
 	@Transactional(readOnly = true)
 	public Page<UserDTO> findAllPaged(Pageable pageable) {

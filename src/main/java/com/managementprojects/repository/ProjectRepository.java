@@ -9,7 +9,8 @@ import com.managementprojects.entities.Project;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 	
-	@Query("SELECT obj FROM Project obj JOIN FETCH obj.task")
+	@Query("SELECT obj FROM Project obj LEFT JOIN FETCH obj.task")
 	List<Project> searchProject();
+
 
 }
