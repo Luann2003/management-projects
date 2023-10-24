@@ -18,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.managementprojects.dto.TaskDTO;
 import com.managementprojects.entities.service.TaskService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/task")
 public class TaskController {
@@ -38,7 +40,7 @@ public class TaskController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TaskDTO> insert(@RequestBody TaskDTO dto){
+	public ResponseEntity<TaskDTO> insert(@Valid @RequestBody TaskDTO dto){
 		dto = service.insert(dto);
 		 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 	                .buildAndExpand(dto.getId()).toUri();

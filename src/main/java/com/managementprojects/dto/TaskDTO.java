@@ -2,15 +2,24 @@ package com.managementprojects.dto;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.managementprojects.entities.Task;
+
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class TaskDTO {
 	
 	private Long id;
 	private String description;
+	
+	@NotBlank(message = "Campo obrigatório")
 	private String name;
-	private Instant finishDate;
 	private Instant startDate;
+	private Instant finishDate;
+	
+	@NotNull(message = "Você deve informar o id do projeto")
 	private Long projectId;
 	
 	private String projectName;
@@ -37,6 +46,15 @@ public class TaskDTO {
 		projectName =  entity.getProject().getName();
 		
 		projectId = entity.getProject().getId();
+	}
+	
+	@JsonIgnore
+	@AssertTrue(message = "A data de término deve ser posterior à data de início")
+	public boolean isFinishDateAfterStartDate() {
+		if (startDate != null && finishDate != null) {
+			return finishDate.isAfter(startDate);
+		}
+		return true; // Se alguma data for nula, a validação passa
 	}
 
 	public Long getId() {

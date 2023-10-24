@@ -19,12 +19,10 @@ public class Task {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Long id;
-	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant startDate;
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant finishDate;
-	
 	private String description;
 	private String name;
 	
@@ -44,6 +42,8 @@ public class Task {
 		this.name = name;
 		this.project = project;
 	}
+	
+	 
 
 	public Long getId() {
 		return id;

@@ -18,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.managementprojects.dto.ProjectDTO;
 import com.managementprojects.entities.service.ProjectService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/projects")
 public class ProjectController {
@@ -38,7 +40,7 @@ public class ProjectController {
 	}
 	 
 	@PostMapping
-	public ResponseEntity<ProjectDTO> insert(@RequestBody ProjectDTO dto){
+	public ResponseEntity<ProjectDTO> insert(@Valid @RequestBody ProjectDTO dto){
 		dto = service.insert(dto);
 		 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 	                .buildAndExpand(dto.getId()).toUri();

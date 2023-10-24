@@ -4,12 +4,17 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.managementprojects.entities.Project;
 import com.managementprojects.entities.Task;
+
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.NotBlank;
 
 public class ProjectDTO {
 	
 	private Long id;
+	@NotBlank(message = "Campo obrigatório")
 	private String name;
 	private String description;
 	private Instant startDate;
@@ -38,6 +43,15 @@ public class ProjectDTO {
 		for (Task task : entity.getTask()) {
 			tasks.add(new TaskDTO(task));    
 		 }
+	}
+	
+	@JsonIgnore
+	@AssertTrue(message = "A data de término deve ser posterior à data de início")
+	public boolean isFinishDateAfterStartDate() {
+		if (startDate != null && finishDate != null) {
+			return finishDate.isAfter(startDate);
+		}
+		return true; // Se alguma data for nula, a validação passa
 	}
 
 	public Long getId() {
