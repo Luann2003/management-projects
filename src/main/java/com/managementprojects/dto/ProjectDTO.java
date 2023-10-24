@@ -10,6 +10,7 @@ import com.managementprojects.entities.Task;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class ProjectDTO {
 	
@@ -17,7 +18,9 @@ public class ProjectDTO {
 	@NotBlank(message = "Campo obrigatório")
 	private String name;
 	private String description;
+	@NotNull(message = "A data não deve ser informada")
 	private Instant startDate;
+	@NotNull(message = "A data não deve ser informada")
 	private Instant finishDate;
 	
 	private List<TaskDTO> tasks = new ArrayList<>();
