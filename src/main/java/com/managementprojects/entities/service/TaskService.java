@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.managementprojects.dto.TaskDTO;
 import com.managementprojects.entities.Project;
 import com.managementprojects.entities.Task;
+import com.managementprojects.entities.User;
 import com.managementprojects.entities.service.exceptions.DatabaseException;
 import com.managementprojects.entities.service.exceptions.ResourceNotFoundException;
 import com.managementprojects.repository.ProjectRepository;
 import com.managementprojects.repository.TaskRepository;
+import com.managementprojects.repository.UserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -26,6 +28,9 @@ public class TaskService {
 	
 	@Autowired
 	private ProjectRepository projectRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Transactional(readOnly = true)
 	public List<TaskDTO> findAll () {
@@ -47,12 +52,17 @@ public class TaskService {
 		 
 		 Project project = projectRepository.getReferenceById(dto.getProjectId());
 		 project.setId(dto.getProjectId());
-		 System.out.println(project.getId());
+		 
+		 User user = userRepository.getReferenceById(dto.getResponsibleId());
+		 user.setId(dto.getResponsibleId());
 		 
 		 copyDtoToEntity(dto, entity);
 		 entity.setProject(project);
+		 entity.setResponsible(user);
 	    
 		 entity = repository.save(entity);
+		 
+	
 		 
 		 return new TaskDTO(entity);
 		}
@@ -87,6 +97,8 @@ public class TaskService {
 	    entity.setName(dto.getName());
 	    entity.setDescription(dto.getDescription());
 	    entity.setStartDate(dto.getStartDate());
-	    entity.setFinishDate(dto.getFinishDate());  
+	    entity.setFinishDate(dto.getFinishDate()); 
+   
+	    
 	}
 }

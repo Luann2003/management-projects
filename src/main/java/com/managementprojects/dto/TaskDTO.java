@@ -23,15 +23,17 @@ public class TaskDTO {
 	
 	@NotNull(message = "Você deve informar o id do projeto")
 	private Long projectId;
+	private String projectName;
 	
 	private String nameResponsible;
 	
-	private String projectName;
+	@NotNull(message = "Você deve informar o id do projeto")
+	private Long responsibleId;
 	
 	public TaskDTO() {
 	}
 	
-	public TaskDTO(Long id, String description, String name, Instant finishDate, Instant startDate, Long projectId, String projectName) {
+	public TaskDTO(Long id, String description, String name, Instant finishDate, Instant startDate, Long projectId, String projectName, String nameResponsible, Long responsibleId) {
 		this.id = id;
 		this.description = description;
 		this.name = name;
@@ -39,6 +41,7 @@ public class TaskDTO {
 		this.startDate = startDate;
 		this.projectId = projectId;
 		this.projectName = projectName;
+		this.nameResponsible = nameResponsible;
 	}
 
 	public TaskDTO(Task entity) {
@@ -47,9 +50,11 @@ public class TaskDTO {
 		description = entity.getDescription();
 		startDate = entity.getStartDate();
 		finishDate = entity.getFinishDate();
+		
 		projectName =  entity.getProject().getName();
 		projectId = entity.getProject().getId();
 		
+		responsibleId = entity.getResponsible().getId();
 		nameResponsible = entity.getResponsible().getName();
 	}
 	
@@ -124,5 +129,13 @@ public class TaskDTO {
 
 	public void setNameResponsible(String nameResponsible) {
 		this.nameResponsible = nameResponsible;
+	}
+
+	public Long getResponsibleId() {
+		return responsibleId;
+	}
+
+	public void setResponsibleId(Long responsibleId) {
+		this.responsibleId = responsibleId;
 	}
 }
