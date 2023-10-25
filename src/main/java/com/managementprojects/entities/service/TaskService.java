@@ -61,9 +61,7 @@ public class TaskService {
 		 entity.setResponsible(user);
 	    
 		 entity = repository.save(entity);
-		 
-	
-		 
+
 		 return new TaskDTO(entity);
 		}
 	
@@ -71,7 +69,13 @@ public class TaskService {
 	public TaskDTO update(Long id, TaskDTO dto) {
 		try {
 			Task entity = repository.getReferenceById(id);
+			
+			User user = userRepository.getReferenceById(dto.getResponsibleId());
+			user.setId(dto.getResponsibleId());
+			 
 			copyDtoToEntity(dto, entity);
+			entity.setResponsible(user);
+			
 			entity = repository.save(entity);
 			return new TaskDTO(entity);
 		}
@@ -98,7 +102,5 @@ public class TaskService {
 	    entity.setDescription(dto.getDescription());
 	    entity.setStartDate(dto.getStartDate());
 	    entity.setFinishDate(dto.getFinishDate()); 
-   
-	    
 	}
 }
