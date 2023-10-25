@@ -1,9 +1,10 @@
 package com.managementprojects.controllers;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -30,8 +32,9 @@ public class TaskController {
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_RESPONSIBLE', 'ROLE_MEMBER')")
 	@GetMapping
-	public ResponseEntity<List<TaskDTO>> findAll(){
-		List<TaskDTO> result = service.findAll();
+	public ResponseEntity<Page<TaskDTO>> findAll(
+			 @RequestParam(name = "name", defaultValue = "") String name, Pageable pageable){
+		Page<TaskDTO> result = service.findAll(name, pageable);
 		return ResponseEntity.ok().body(result);
 	}
 	
