@@ -16,12 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.managementprojects.dto.RoleDTO;
 import com.managementprojects.dto.UserDTO;
 import com.managementprojects.dto.UserInsertDTO;
+import com.managementprojects.dto.UserUpdateDTO;
 import com.managementprojects.entities.Role;
 import com.managementprojects.entities.User;
 import com.managementprojects.entities.service.exceptions.ResourceNotFoundException;
 import com.managementprojects.projections.UserDetailsProjection;
 import com.managementprojects.repository.RoleRepository;
 import com.managementprojects.repository.UserRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -63,6 +66,19 @@ public class UserService implements UserDetailsService {
 		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 		entity = repository.save(entity);
 		return new UserDTO(entity);
+	}
+	
+	@Transactional
+	public UserDTO update(Long id, UserUpdateDTO dto) {
+		try {
+			User entity = repository.getReferenceById(id);
+			copyDtoToEntity(dto, entity);
+			entity = repository.save(entity);
+			return new UserDTO(entity);
+		}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}		
 	}
 
 	@Transactional(readOnly = true)
