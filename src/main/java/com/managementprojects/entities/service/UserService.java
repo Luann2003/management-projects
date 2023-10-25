@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.managementprojects.dto.RoleDTO;
@@ -19,6 +21,7 @@ import com.managementprojects.dto.UserInsertDTO;
 import com.managementprojects.dto.UserUpdateDTO;
 import com.managementprojects.entities.Role;
 import com.managementprojects.entities.User;
+import com.managementprojects.entities.service.exceptions.DatabaseException;
 import com.managementprojects.entities.service.exceptions.ResourceNotFoundException;
 import com.managementprojects.projections.UserDetailsProjection;
 import com.managementprojects.repository.RoleRepository;
@@ -80,6 +83,19 @@ public class UserService implements UserDetailsService {
 			throw new ResourceNotFoundException("Id not found " + id);
 		}		
 	}
+	
+	@Transactional(propagation = Propagation.SUPPORTS)
+    public void delete(Long id) {
+    	if (!repository.existsById(id)) {
+    		throw new ResourceNotFoundException("Recurso não encontrado");
+    	}
+    	try {
+            repository.deleteById(id);    		
+    	}
+        catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Falha de integridade referencial");
+        }
+    }
 
 	@Transactional(readOnly = true)
 	public UserDTO findMe() {
