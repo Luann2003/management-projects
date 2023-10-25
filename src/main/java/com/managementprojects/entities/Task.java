@@ -30,10 +30,14 @@ public class Task {
 	@JoinColumn(name = "project_id")
 	private Project project;
 	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User responsible;
+	
 	public Task() {
 	}
 
-	public Task(Long id, Instant startDate, Instant finishDate, String description, String name, Project project) {
+	public Task(Long id, Instant startDate, Instant finishDate, String description, String name, Project project, User responsible) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -41,6 +45,7 @@ public class Task {
 		this.description = description;
 		this.name = name;
 		this.project = project;
+		this.responsible = responsible;
 	}
 
 	public Long getId() {
@@ -94,6 +99,14 @@ public class Task {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+	
+	public User getResponsible() {
+		return responsible;
+	}
+
+	public void setResponsible(User responsible) {
+		this.responsible = responsible;
 	}
 
 	@Override

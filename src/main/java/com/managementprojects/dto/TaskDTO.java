@@ -24,6 +24,8 @@ public class TaskDTO {
 	@NotNull(message = "Você deve informar o id do projeto")
 	private Long projectId;
 	
+	private String nameResponsible;
+	
 	private String projectName;
 	
 	public TaskDTO() {
@@ -46,8 +48,9 @@ public class TaskDTO {
 		startDate = entity.getStartDate();
 		finishDate = entity.getFinishDate();
 		projectName =  entity.getProject().getName();
-		
 		projectId = entity.getProject().getId();
+		
+		nameResponsible = entity.getResponsible().getName();
 	}
 	
 	@JsonIgnore
@@ -113,5 +116,13 @@ public class TaskDTO {
 
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
+	}
+
+	public String getNameResponsible() {
+		return nameResponsible;
+	}
+
+	public void setNameResponsible(String nameResponsible) {
+		this.nameResponsible = nameResponsible;
 	}
 }

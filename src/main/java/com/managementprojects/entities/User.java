@@ -1,7 +1,9 @@
 package com.managementprojects.entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -39,6 +42,9 @@ public class User implements UserDetails{
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+    
+    @OneToMany(mappedBy = "responsible")
+    private List<Task> tasks = new ArrayList<>();
 
     public User() {
     }
@@ -89,6 +95,10 @@ public class User implements UserDetails{
 	public void addRole(Role role) {
 		roles.add(role);
 	}
+	
+	public List<Task> getTasks() {
+		return tasks;
+	}
 
 	@Override
     public boolean equals(Object o) {
@@ -134,4 +144,5 @@ public class User implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
+
 }
