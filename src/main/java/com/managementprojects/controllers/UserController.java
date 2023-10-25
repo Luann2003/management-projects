@@ -31,19 +31,21 @@ public class UserController {
 	@Autowired
 	private UserService service;
 
-	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_RESPONSIBLE', 'ROLE_ADMINISTRATOR')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_RESPONSIBLE', 'ROLE_MEMBER')")
 	@GetMapping(value = "/me")
 	public ResponseEntity<UserDTO> findMe(){
 		UserDTO dto = service.findMe();
 		return ResponseEntity.ok().body(dto);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_RESPONSIBLE', 'ROLE_MEMBER')")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
 		UserDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_RESPONSIBLE', 'ROLE_MEMBER')")
 	@GetMapping
 	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable) {
 		Page<UserDTO> list = service.findAllPaged(pageable);		
@@ -58,12 +60,14 @@ public class UserController {
 		return ResponseEntity.created(uri).body(newDto);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody @Valid UserUpdateDTO dto) {
 		UserDTO newDto = service.update(id, dto);
 		return ResponseEntity.ok().body(newDto);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
