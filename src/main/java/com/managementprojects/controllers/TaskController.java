@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.managementprojects.dto.TaskDTO;
-import com.managementprojects.entities.service.TaskService;
+import com.managementprojects.service.TaskService;
 
 import jakarta.validation.Valid;
 

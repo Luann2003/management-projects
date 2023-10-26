@@ -9,9 +9,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.managementprojects.entities.service.exceptions.DatabaseException;
-import com.managementprojects.entities.service.exceptions.EmailException;
-import com.managementprojects.entities.service.exceptions.ResourceNotFoundException;
+import com.managementprojects.service.exceptions.DatabaseException;
+import com.managementprojects.service.exceptions.EmailException;
+import com.managementprojects.service.exceptions.ResourceNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
 

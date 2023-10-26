@@ -1,4 +1,4 @@
-package com.managementprojects.entities.service.validation;
+package com.managementprojects.service.validation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

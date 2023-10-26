@@ -1,4 +1,4 @@
-package com.managementprojects.entities.service;
+package com.managementprojects.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.managementprojects.dto.ProjectDTO;
 import com.managementprojects.entities.Project;
-import com.managementprojects.entities.service.exceptions.DatabaseException;
-import com.managementprojects.entities.service.exceptions.ResourceNotFoundException;
 import com.managementprojects.repository.ProjectRepository;
+import com.managementprojects.service.exceptions.DatabaseException;
+import com.managementprojects.service.exceptions.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
 

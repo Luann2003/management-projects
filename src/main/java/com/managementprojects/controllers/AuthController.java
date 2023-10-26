@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.managementprojects.dto.EmailDTO;
 import com.managementprojects.dto.NewPasswordDTO;
-import com.managementprojects.entities.service.AuthService;
+import com.managementprojects.service.AuthService;
 
 import jakarta.validation.Valid;
 

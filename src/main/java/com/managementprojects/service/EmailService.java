@@ -1,4 +1,4 @@
-package com.managementprojects.entities.service;
+package com.managementprojects.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,7 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.managementprojects.entities.service.exceptions.EmailException;
+import com.managementprojects.service.exceptions.EmailException;
 
 @Service
 public class EmailService {

@@ -1,4 +1,4 @@
-package com.managementprojects.entities.service;
+package com.managementprojects.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,11 +21,11 @@ import com.managementprojects.dto.UserInsertDTO;
 import com.managementprojects.dto.UserUpdateDTO;
 import com.managementprojects.entities.Role;
 import com.managementprojects.entities.User;
-import com.managementprojects.entities.service.exceptions.DatabaseException;
-import com.managementprojects.entities.service.exceptions.ResourceNotFoundException;
 import com.managementprojects.projections.UserDetailsProjection;
 import com.managementprojects.repository.RoleRepository;
 import com.managementprojects.repository.UserRepository;
+import com.managementprojects.service.exceptions.DatabaseException;
+import com.managementprojects.service.exceptions.ResourceNotFoundException;
 
 import jakarta.persistence.EntityNotFoundException;
 

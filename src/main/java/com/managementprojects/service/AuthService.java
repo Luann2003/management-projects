@@ -1,4 +1,4 @@
-package com.managementprojects.entities.service;
+package com.managementprojects.service;
 
 import java.time.Instant;
 import java.util.List;
@@ -18,9 +18,9 @@ import com.managementprojects.dto.EmailDTO;
 import com.managementprojects.dto.NewPasswordDTO;
 import com.managementprojects.entities.PasswordRecover;
 import com.managementprojects.entities.User;
-import com.managementprojects.entities.service.exceptions.ResourceNotFoundException;
 import com.managementprojects.repository.PasswordRecoverRepository;
 import com.managementprojects.repository.UserRepository;
+import com.managementprojects.service.exceptions.ResourceNotFoundException;
 
 @Service
 public class AuthService {

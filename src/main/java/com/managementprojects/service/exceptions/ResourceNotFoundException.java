@@ -1,4 +1,4 @@
-package com.managementprojects.entities.service.exceptions;
+package com.managementprojects.service.exceptions;
 
 @SuppressWarnings("serial")
 public class ResourceNotFoundException extends RuntimeException {

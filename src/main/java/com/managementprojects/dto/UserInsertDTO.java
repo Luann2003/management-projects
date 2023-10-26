@@ -1,6 +1,6 @@
 package com.managementprojects.dto;
 
-import com.managementprojects.entities.service.validation.UserInsertValid;
+import com.managementprojects.service.validation.UserInsertValid;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

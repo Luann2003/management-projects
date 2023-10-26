@@ -20,7 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.managementprojects.dto.UserDTO;
 import com.managementprojects.dto.UserInsertDTO;
 import com.managementprojects.dto.UserUpdateDTO;
-import com.managementprojects.entities.service.UserService;
+import com.managementprojects.service.UserService;
 
 import jakarta.validation.Valid;
 
