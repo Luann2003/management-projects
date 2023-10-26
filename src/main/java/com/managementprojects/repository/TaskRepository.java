@@ -14,5 +14,4 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 		       "FROM Task task "
 		       + "WHERE UPPER(task.name) LIKE UPPER(CONCAT('%', :name, '%'))")
 		Page<Task> search02(String name, Pageable pageable);
-
 }

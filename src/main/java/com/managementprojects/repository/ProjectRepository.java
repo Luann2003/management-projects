@@ -12,6 +12,4 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 	@Query("SELECT obj FROM Project obj LEFT JOIN FETCH obj.task " +
             "WHERE UPPER(obj.name) LIKE UPPER(CONCAT('%', :name, '%'))")
     Page<Project> searchByName(String name, Pageable pageable);
-
-
 }
