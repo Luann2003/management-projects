@@ -12,7 +12,7 @@ public class UserInsertDTO extends UserDTO {
 	@Size(min = 6, message = "deve ter no minimo 6 caracteres")
 	private String password;
 
-	UserInsertDTO() {
+	public UserInsertDTO() {
 		super();
 	}
 	

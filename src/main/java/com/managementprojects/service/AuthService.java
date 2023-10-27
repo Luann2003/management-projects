@@ -43,7 +43,7 @@ public class AuthService {
 	@Autowired
 	private UserRepository repository;
 
-	protected User authenticated() {
+	public User authenticated() {
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			Jwt jwtPrincipal = (Jwt) authentication.getPrincipal();
@@ -55,7 +55,7 @@ public class AuthService {
 	}
 	
 	@Transactional
-	public void createRecoverToken(EmailDTO body) {
+	public void createRecoverToken(EmailDTO body) {	
 
 		User user = repository.findByEmail(body.getEmail());
 		if (user == null) {
@@ -76,7 +76,6 @@ public class AuthService {
 				+ tokenMinutes + " minutos";
 
 		emailService.sendEmail(body.getEmail(), "Recuperação de senha", text);
-
 	}
 
 	@Transactional
@@ -89,7 +88,5 @@ public class AuthService {
 		User user = repository.findByEmail(result.get(0).getEmail());
 		user.setPassword(passwordEncoder.encode(body.getPassword()));
 		user = repository.save(user);
-
 	}
-	
 }
