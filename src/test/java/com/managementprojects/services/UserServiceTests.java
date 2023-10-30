@@ -68,8 +68,6 @@ public class UserServiceTests {
 	private Long existingUserId, nonExistingUserId, dependentUserId;
 	private String password;
 	
-	
-	
 	@BeforeEach
 	void setup() throws Exception {
 				
@@ -89,11 +87,7 @@ public class UserServiceTests {
 		userDeatils  = UserDetailsFactory.createCustomClient(existingUsername);
 		
 		Mockito.when(repository.searchUserAndRolesByEmail(existingUsername)).thenReturn(userDeatils);
-		Mockito.when(repository.searchUserAndRolesByEmail(nonExistingUsername)).thenReturn(new ArrayList<>());
-		
-		
-		Mockito.when(repository.searchUserAndRolesByEmail(existingUsername)).thenReturn(userDeatils);
-		Mockito.when(repository.searchUserAndRolesByEmail(nonExistingUsername)).thenReturn(new ArrayList<>());
+		Mockito.when(repository.searchUserAndRolesByEmail(nonExistingUsername)).thenReturn(new ArrayList<>());		
 		
 		Mockito.when(repository.findAll(Mockito.any(Pageable.class))).thenReturn(page);
 		
@@ -242,7 +236,4 @@ public class UserServiceTests {
 		});
 		Mockito.verify(repository, times(1)).deleteById(dependentUserId);
 	}
-	
-	
-	
 }
