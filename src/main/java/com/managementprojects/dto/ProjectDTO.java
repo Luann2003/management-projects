@@ -1,5 +1,6 @@
 package com.managementprojects.dto;
 
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,13 +102,15 @@ public class ProjectDTO {
 		return tasks;
 	}
 	
-	public double getCompletionPercentage() {
+	public String getCompletionPercentage() {
         long totalTasks = tasks.size();
         if (totalTasks == 0) {
-            return 0.0; // Evite a divisão por zero
+            return "0.00%"; 
         }
 
         long completedTasks = tasks.stream().filter(TaskDTO::isCompleted).count();
-        return ((double) completedTasks / totalTasks) * 100.0;
+        double percentage = ((double) completedTasks / totalTasks) * 100.0;
+        
+        return String.format("%.2f%%", percentage);
     }
 }
