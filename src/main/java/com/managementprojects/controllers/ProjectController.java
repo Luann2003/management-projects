@@ -42,7 +42,7 @@ public class ProjectController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ProjectDTO> findById(@PathVariable Long id) {
 	    ProjectDTO dto = service.findById(id);
-	     return ResponseEntity.ok(dto);
+	    return ResponseEntity.ok(dto);
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_RESPONSIBLE', 'ROLE_MEMBER')")

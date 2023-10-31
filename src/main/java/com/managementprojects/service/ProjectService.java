@@ -68,6 +68,7 @@ public class ProjectService {
             throw new DatabaseException("Falha de integridade referencial");
         }
     }
+	
 	private void copyDtoToEntity(ProjectDTO dto, Project entity) {
 		entity.setName(dto.getName());
 		entity.setDescription(dto.getDescription());

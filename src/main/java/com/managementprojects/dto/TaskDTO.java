@@ -30,10 +30,12 @@ public class TaskDTO {
 	@NotNull(message = "Você deve informar o id do projeto")
 	private Long responsibleId;
 	
+	private boolean completed;
+	
 	public TaskDTO() {
 	}
 	
-	public TaskDTO(Long id, String description, String name, Instant finishDate, Instant startDate, Long projectId, String projectName, String nameResponsible, Long responsibleId) {
+	public TaskDTO(Long id, String description, String name, Instant finishDate, Instant startDate, Long projectId, String projectName, String nameResponsible, Long responsibleId, boolean completed) {
 		this.id = id;
 		this.description = description;
 		this.name = name;
@@ -42,6 +44,7 @@ public class TaskDTO {
 		this.projectId = projectId;
 		this.projectName = projectName;
 		this.nameResponsible = nameResponsible;
+		this.completed = completed;
 	}
 
 	public TaskDTO(Task entity) {
@@ -50,6 +53,7 @@ public class TaskDTO {
 		description = entity.getDescription();
 		startDate = entity.getStartDate();
 		finishDate = entity.getFinishDate();
+		completed = entity.isCompleted();
 		
 		projectName =  entity.getProject().getName();
 		projectId = entity.getProject().getId();
@@ -137,5 +141,13 @@ public class TaskDTO {
 
 	public void setResponsibleId(Long responsibleId) {
 		this.responsibleId = responsibleId;
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
 	}
 }

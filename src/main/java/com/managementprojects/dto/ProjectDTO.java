@@ -100,4 +100,14 @@ public class ProjectDTO {
 	public List<TaskDTO> getTasks() {
 		return tasks;
 	}
+	
+	public double getCompletionPercentage() {
+        long totalTasks = tasks.size();
+        if (totalTasks == 0) {
+            return 0.0; // Evite a divisão por zero
+        }
+
+        long completedTasks = tasks.stream().filter(TaskDTO::isCompleted).count();
+        return ((double) completedTasks / totalTasks) * 100.0;
+    }
 }

@@ -26,6 +26,8 @@ public class Task {
 	private String description;
 	private String name;
 	
+	private boolean completed;
+	
 	@ManyToOne
 	@JoinColumn(name = "project_id")
 	private Project project;
@@ -37,7 +39,7 @@ public class Task {
 	public Task() {
 	}
 
-	public Task(Long id, Instant startDate, Instant finishDate, String description, String name, Project project, User responsible) {
+	public Task(Long id, Instant startDate, Instant finishDate, String description, String name, Project project, User responsible,  boolean completed) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -46,6 +48,7 @@ public class Task {
 		this.name = name;
 		this.project = project;
 		this.responsible = responsible;
+		this.completed = completed;
 	}
 
 	public Long getId() {
@@ -107,6 +110,14 @@ public class Task {
 
 	public void setResponsible(User responsible) {
 		this.responsible = responsible;
+	}
+	
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
 	}
 
 	@Override
