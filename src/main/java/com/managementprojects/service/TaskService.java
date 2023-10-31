@@ -58,6 +58,7 @@ public class TaskService {
 		 copyDtoToEntity(dto, entity);
 		 entity.setProject(project);
 		 entity.setResponsible(user);
+		 entity.setCompleted(dto.isCompleted());
 	    
 		 entity = repository.save(entity);
 
@@ -74,6 +75,7 @@ public class TaskService {
 			 
 			copyDtoToEntity(dto, entity);
 			entity.setResponsible(user);
+			entity.setCompleted(dto.isCompleted());
 			
 			entity = repository.save(entity);
 			return new TaskDTO(entity);
