@@ -24,7 +24,6 @@ import com.managementprojects.service.AuthService;
 import com.managementprojects.service.EmailService;
 
 
-
 @ExtendWith(SpringExtension.class)
 public class AuthServiceTests {
 
@@ -63,8 +62,7 @@ public class AuthServiceTests {
 		when(securityContext.getAuthentication()).thenReturn(authentication);
 
 		Mockito.when(repository.findByEmail(existingUsername)).thenReturn(user);
-		
-		
+			
 	}
 	@Test
 	public void authenticatedShouldReturnUserEntityWhenUserExists() {
