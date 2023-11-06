@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -62,6 +63,7 @@ public class AuthServiceTests {
 		when(securityContext.getAuthentication()).thenReturn(authentication);
 
 		Mockito.when(repository.findByEmail(existingUsername)).thenReturn(user);
+		Mockito.when(repository.findByEmail(nonExistingUsername)).thenThrow(UsernameNotFoundException.class);
 			
 	}
 	@Test
@@ -71,4 +73,24 @@ public class AuthServiceTests {
 		
 		Assertions.assertNotNull(result);
 	}
+	@Test
+	public void authenticatedShouldReturnUsernameNotFoundExceptionWhenUsernameNonExisting() {		
+
+	    Authentication authentication = mock(Authentication.class);
+	    Jwt jwtPrincipal = mock(Jwt.class);
+	    when(jwtPrincipal.getClaim("username")).thenReturn(nonExistingUsername);
+	    when(authentication.getPrincipal()).thenReturn(jwtPrincipal);
+	    SecurityContext securityContext = mock(SecurityContext.class);
+	    SecurityContextHolder.setContext(securityContext);
+	    when(securityContext.getAuthentication()).thenReturn(authentication);
+
+	    Mockito.when(repository.findByEmail("invalidUsername")).thenReturn(null);
+
+	    Assertions.assertThrows(UsernameNotFoundException.class, () -> {
+	        service.authenticated();
+	    });
+	}
+	
+	
+
 }
