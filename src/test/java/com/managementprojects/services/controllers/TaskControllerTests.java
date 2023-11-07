@@ -1,11 +1,11 @@
 package com.managementprojects.services.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.time.Instant;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,11 +15,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.managementprojects.dto.TaskDTO;
-import com.managementprojects.entities.Project;
 import com.managementprojects.factory.TaskFactory;
 import com.managementprojects.utils.TokenUtil;
 
@@ -37,6 +37,7 @@ public class TaskControllerTests {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
+	private String memberUsername, memberPassword;
 	private String adminUsername, adminPassword;
 	
 	private Long existingId, nonExistingId;
@@ -49,6 +50,9 @@ public class TaskControllerTests {
 		
 		adminUsername = "verfute2005@gmail.com";
 		adminPassword = "123456";
+		
+		memberUsername = "maria@gmail.com";
+		memberPassword = "123456";
 
 	}
 	
@@ -115,4 +119,86 @@ public class TaskControllerTests {
 		
 		result.andExpect(status().isCreated());
 	}
+	
+	@Test
+	public void updateShouldUpdateResourceWhenIdExists() throws Exception {
+		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
+		
+		TaskDTO taskDTO = TaskFactory.createTaskDTO();
+		
+		String jsonBody = objectMapper.writeValueAsString(taskDTO);
+		
+		ResultActions result =
+				mockMvc.perform(put("/task/{id}", existingId)
+					.content(jsonBody)
+					.header("Authorization", "Bearer " + accessToken)
+					.contentType(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isOk());
+	}
+	
+
+	@Test
+	public void updateShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
+			
+		TaskDTO taskDTO = TaskFactory.createTaskDTO();
+		String jsonBody = objectMapper.writeValueAsString(taskDTO);
+		
+		ResultActions result =
+				mockMvc.perform(put("/task/{id}", nonExistingId)
+					.content(jsonBody)
+					.header("Authorization", "Bearer " + accessToken)
+					.contentType(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isNotFound());
+	}
+	
+
+	@Test
+	public void deleteShouldReturnNoContentWhenIndependentId() throws Exception {
+
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
+
+		Long independentId = 4L;
+		
+		ResultActions result =
+				mockMvc.perform(delete("/task/{id}", independentId)
+				.header("Authorization", "Bearer " + accessToken));
+		
+		
+		result.andExpect(status().isNoContent());
+	}
+
+	@Test
+	public void deleteShouldReturnNotFoundWhenNonExistingId() throws Exception {		
+		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
+
+		ResultActions result =
+				mockMvc.perform(delete("/task/{id}", nonExistingId)
+				.header("Authorization", "Bearer " + accessToken));
+		
+
+		result.andExpect(status().isNotFound());
+	}
+
+	@Test
+	@Transactional(propagation = Propagation.SUPPORTS) 
+	public void deleteShouldReturnForbbidenWhenMemberLogged() throws Exception {		
+		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, memberUsername, memberPassword);
+
+		
+		ResultActions result =
+				mockMvc.perform(delete("/task/{id}", existingId)
+				.header("Authorization", "Bearer " + accessToken));
+				
+		result.andExpect(status().isForbidden());
+	}
+	
 }
