@@ -38,7 +38,6 @@ public class ProjectControllerTests {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	private String memberUsername, memberPassword;
 	private String adminUsername, adminPassword;
 	
 	private Long existingId, nonExistingId;
@@ -51,9 +50,7 @@ public class ProjectControllerTests {
 		
 		adminUsername = "verfute2005@gmail.com";
 		adminPassword = "123456";
-		
-		memberUsername = "maria@gmail.com";
-		memberPassword = "123456";
+
 	}
 	
 	@Test
@@ -104,7 +101,7 @@ public class ProjectControllerTests {
 	}
 	
 	@Test
-	public void insertShouldStatusIsCreated() throws Exception {
+	public void insertProjectShouldStatusIsCreated() throws Exception {
 		
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 		

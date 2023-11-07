@@ -128,7 +128,7 @@ public class ProjectServiceTests {
 		ProjectDTO result = serviceSpy.update(existingId, projectDTO);
 
 		Assertions.assertNotNull(result);
-		Assertions.assertEquals(projectDTO.getId(), existingId);
+		Assertions.assertEquals(result.getId(), existingId);
 	}
 	
 	@Test

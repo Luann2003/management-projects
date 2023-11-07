@@ -148,13 +148,13 @@ public class TaskServiceTests {
 	}
 	
 	@Test
-	public void updateShouldReturnProjectDTOWhenIdExists() {
+	public void updateShouldReturnTaskDTOWhenIdExists() {
 
 		TaskService serviceSpy = Mockito.spy(service);
 		TaskDTO result = serviceSpy.update(existingId, taskDTO);
 
 		Assertions.assertNotNull(result);
-		Assertions.assertEquals(taskDTO.getId(), existingId);
+		Assertions.assertEquals(result.getId(), existingId);
 	}
 	
 	@Test
