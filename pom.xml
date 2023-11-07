@@ -88,6 +88,9 @@
 						<exclude>com/managementprojects/config/**</exclude>
 						<exclude>com/managementprojects/dto/**</exclude>
 						<exclude>com/managementprojects/entities/**</exclude>
+						<exclude>com/managementprojects/controllers/exceptions/**</exclude>
+                    	<exclude>com/managementprojects/service/validation/**</exclude>
+                    	<exclude>com/managementprojects/service/exceptions/**</exclude>
 					</excludes>
 				</configuration>
 				<executions>
