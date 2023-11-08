@@ -32,5 +32,4 @@ public class AuthController {
 		authservice.saveNewPassword(body);
 		return ResponseEntity.noContent().build();
 	}
-
 }

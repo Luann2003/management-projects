@@ -56,7 +56,7 @@ public class ProjectController {
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_RESPONSIBLE')")
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ProjectDTO> update(@PathVariable Long id, @RequestBody ProjectDTO dto){
+	public ResponseEntity<ProjectDTO> update(@PathVariable Long id, @Valid @RequestBody ProjectDTO dto){
 		 dto = service.update(id, dto);
 	     return ResponseEntity.ok(dto);
 	}

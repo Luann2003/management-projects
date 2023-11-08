@@ -58,7 +58,7 @@ public class AuthController {
 
 	@Test
 	public void createRecoverTokenShouldReturnNoContent() throws Exception {
-//
+
 //		EmailDTO email = new EmailDTO(adminUsername);
 //
 //		String jsonBody = objectMapper.writeValueAsString(email);

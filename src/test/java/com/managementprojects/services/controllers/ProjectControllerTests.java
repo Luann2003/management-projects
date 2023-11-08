@@ -56,7 +56,6 @@ public class ProjectControllerTests {
 	@Test
 	public void findAllShouldReturnUsersAdminLogged() throws Exception {
 		
-
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 		
 		ResultActions result =
@@ -75,7 +74,6 @@ public class ProjectControllerTests {
 	@Test
 	public void findByIdShouldReturnProjectDTOWhenIdExisting() throws Exception {
 		
-
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 		
 		ResultActions result =
@@ -89,7 +87,6 @@ public class ProjectControllerTests {
 	@Test
 	public void findByIdShouldReturnResourceNotFoundExceptionWhenIdDoesNotExisting() throws Exception {
 		
-
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 		
 		ResultActions result =
@@ -136,7 +133,6 @@ public class ProjectControllerTests {
 		result.andExpect(status().isOk());
 	}
 	
-
 	@Test
 	public void updateShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
 		
